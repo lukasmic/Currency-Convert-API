@@ -1,9 +1,5 @@
-﻿using Currency_Convert_API.Entities;
-using Currency_Convert_API.Infrastructure;
-using System;
+﻿using Currency_Convert_API.Infrastructure;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 using Xunit.Categories;
 

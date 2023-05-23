@@ -1,8 +1,7 @@
 ﻿using Currency_Convert_API.Entities;
-using System.Xml;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 
 namespace Currency_Convert_API.Infrastructure
 {

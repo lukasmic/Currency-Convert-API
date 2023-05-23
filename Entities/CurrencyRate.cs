@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Currency_Convert_API.Entities
+﻿namespace Currency_Convert_API.Entities
 {
     public class CurrencyRate
     {
