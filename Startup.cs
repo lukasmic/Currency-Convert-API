@@ -1,10 +1,12 @@
 using Currency_Convert_API.Application;
+using Currency_Convert_API.HostedServices;
 using Currency_Convert_API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace Currency_Convert_API
@@ -18,11 +20,16 @@ namespace Currency_Convert_API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(config =>
+            {
+                config.ClearProviders();
+                config.AddConsole();
+            });
             services.AddCors();
-            services.AddSingleton<ICurrencyRatesRepository, XmlRepository>();
+            services.AddHostedService<CurrencyRateFetchService>();
+            services.AddTransient<ICurrencyRatesRepository, XmlRepository>();
             services.AddScoped<ICurrencyRateHandler, CurrencyRateHandler>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -31,7 +38,6 @@ namespace Currency_Convert_API
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

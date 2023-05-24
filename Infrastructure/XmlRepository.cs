@@ -12,7 +12,7 @@ namespace Currency_Convert_API.Infrastructure
         {
             List<CurrencyRate> currencyRates = SetBaseRate();
 
-            XmlReader reader = XmlReader.Create("C:\\eurofxref-daily.xml");
+            var reader = XmlReader.Create("eurofxref-daily.xml");
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element && reader.Name == "Cube" && reader.GetAttribute("currency") != null)
