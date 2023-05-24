@@ -1,4 +1,6 @@
-﻿using Currency_Convert_API.Infrastructure;
+﻿using Currency_Convert_API.Application;
+using Currency_Convert_API.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Xunit;
 using Xunit.Categories;
@@ -8,13 +10,14 @@ namespace Currency_Convert_API.API.Tests
     [UnitTest]
     public class CurrencyRateControllerTests
     {
-        private readonly InlineRepository _repository;
+        private readonly ICurrencyRateHandler _handler;
         private readonly CurrencyRateController _controller;
 
         public CurrencyRateControllerTests()
         {
-            _repository = new InlineRepository();
-            _controller = new CurrencyRateController(_repository);
+            var _repository = new InlineRepository();
+            _handler = new CurrencyRateHandler(_repository);
+            _controller = new CurrencyRateController(_handler);
         }
 
         [Theory]
@@ -24,6 +27,14 @@ namespace Currency_Convert_API.API.Tests
             var result = _controller.GetConvertedCurrency(currency, targetCurrency, amount);
 
             Assert.Equal(expectedAmount, result.Value);
+        }
+
+        [Fact]
+        public void GetConvertedCurrency_GivenInvalidRequestParameters_ReturnsNotFound()
+        {
+            var result = _controller.GetConvertedCurrency("EUR", "INVALID", 1);
+
+            Assert.IsType<NotFoundResult>(result.Result);
         }
 
         [Fact]

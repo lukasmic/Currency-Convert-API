@@ -1,16 +1,17 @@
 ﻿using Currency_Convert_API.Entities;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace Currency_Convert_API.Infrastructure
 {
     public class XmlRepository : ICurrencyRatesRepository
     {
-        public IEnumerable<CurrencyRate> ReadFromFile()
+        private readonly IEnumerable<CurrencyRate> _currencyRates;
+
+        public XmlRepository()
         {
-            List<CurrencyRate> currencyRates = new();
-            currencyRates.Add(new CurrencyRate() { Currency = "EUR", ToEuro = 1 });
+            List<CurrencyRate> currencyRates = SetBaseRate();
+
             XmlReader reader = XmlReader.Create("C:\\eurofxref-daily.xml");
             while (reader.Read())
             {
@@ -25,17 +26,20 @@ namespace Currency_Convert_API.Infrastructure
                     currencyRates.Add(currencyRate);
                 }
             }
-            return currencyRates;
+            _currencyRates = currencyRates;
         }
 
-        public CurrencyRate GetCurrencyRate(string currency)
+        public IEnumerable<CurrencyRate> GetCurrencyRates()
         {
-            return ReadFromFile().Where(rate => rate.Currency == currency).SingleOrDefault();
+            return _currencyRates;
         }
 
-        public IEnumerable<string> GetCurrencyRateNames()
+        private static List<CurrencyRate> SetBaseRate()
         {
-            return ReadFromFile().Select(r => r.Currency);
+            return new()
+            {
+                new CurrencyRate() { Currency = "EUR", ToEuro = 1 }
+            };
         }
     }
 }

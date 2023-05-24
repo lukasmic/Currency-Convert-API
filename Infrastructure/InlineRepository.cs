@@ -1,6 +1,5 @@
 ﻿using Currency_Convert_API.Entities;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Currency_Convert_API.Infrastructure
 {
@@ -14,14 +13,9 @@ namespace Currency_Convert_API.Infrastructure
             new CurrencyRate { Currency = "BGN", ToEuro = 1.9558 }
         };
 
-        public IEnumerable<string> GetCurrencyRateNames()
+        public IEnumerable<CurrencyRate> GetCurrencyRates()
         {
-            return currencyRates.Select(r => r.Currency);
-        }
-
-        public CurrencyRate GetCurrencyRate(string currency)
-        {
-            return currencyRates.Where(rate => rate.Currency == currency).SingleOrDefault();
+            return currencyRates;
         }
     }
 }

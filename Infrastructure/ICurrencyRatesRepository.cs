@@ -5,8 +5,6 @@ namespace Currency_Convert_API.Infrastructure
 {
     public interface ICurrencyRatesRepository
     {
-        public IEnumerable<string> GetCurrencyRateNames();
-
-        public CurrencyRate GetCurrencyRate(string currency);
+        public IEnumerable<CurrencyRate> GetCurrencyRates();
     }
 }

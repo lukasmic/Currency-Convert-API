@@ -1,3 +1,4 @@
+using Currency_Convert_API.Application;
 using Currency_Convert_API.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,7 @@ namespace Currency_Convert_API
         {
             services.AddCors();
             services.AddSingleton<ICurrencyRatesRepository, XmlRepository>();
+            services.AddScoped<ICurrencyRateHandler, CurrencyRateHandler>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

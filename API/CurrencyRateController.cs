@@ -1,4 +1,4 @@
-﻿using Currency_Convert_API.Infrastructure;
+﻿using Currency_Convert_API.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -8,22 +8,21 @@ namespace Currency_Convert_API.API
     [ApiController]
     [Route("currencyRate")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public class CurrencyRateController : ControllerBase
     {
-        private readonly ICurrencyRatesRepository repository;
+        private readonly ICurrencyRateHandler handler;
 
-        public CurrencyRateController(ICurrencyRatesRepository repository)
+        public CurrencyRateController(ICurrencyRateHandler currencyRateHandler)
         {
-            this.repository = repository;
+            handler = currencyRateHandler;
         }
 
         [HttpGet]
         [Route("/currencies")]
         public IEnumerable<string> GetCurrencies()
         {
-            var currencyRate = repository.GetCurrencyRateNames();
+            var currencyRate = handler.GetCurrencyRateNames();
 
             return currencyRate;
         }
@@ -31,8 +30,8 @@ namespace Currency_Convert_API.API
         [HttpGet("/convertedCurrency/{currency}:{amount}/{targetCurrency}")]
         public ActionResult<double> GetConvertedCurrency(string currency, string targetCurrency, double amount)
         {
-            var rate = repository.GetCurrencyRate(currency.ToUpper());
-            var targetRate = repository.GetCurrencyRate(targetCurrency.ToUpper());
+            var rate = handler.GetCurrencyRate(currency.ToUpper());
+            var targetRate = handler.GetCurrencyRate(targetCurrency.ToUpper());
 
             if (rate == null || targetRate == null)
             {
