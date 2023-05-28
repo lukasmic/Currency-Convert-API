@@ -1,7 +1,7 @@
 ﻿using Currency_Convert_API.Application;
-using Currency_Convert_API.Infrastructure;
+using Currency_Convert_API.Features;
+using CurrencyConvert.Infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using Xunit;
 using Xunit.Categories;
 

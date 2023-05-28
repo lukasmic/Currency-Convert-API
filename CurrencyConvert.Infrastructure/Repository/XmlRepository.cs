@@ -1,8 +1,7 @@
-﻿using Currency_Convert_API.Entities;
-using System.Collections.Generic;
+﻿using Currency_Convert_API.Models;
 using System.Xml;
 
-namespace Currency_Convert_API.Infrastructure
+namespace CurrencyConvert.Infrastructure.Repository
 {
     public class XmlRepository : ICurrencyRatesRepository
     {

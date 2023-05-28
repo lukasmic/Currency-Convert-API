@@ -1,8 +1,5 @@
-﻿using Currency_Convert_API.Entities;
-using Currency_Convert_API.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Currency_Convert_API.Models;
+using CurrencyConvert.Infrastructure.Repository;
 
 namespace Currency_Convert_API.Application
 {
@@ -17,7 +14,7 @@ namespace Currency_Convert_API.Application
 
         public CurrencyRate GetCurrencyRate(string currency)
         {
-            return repository.GetCurrencyRates().Where(rate => rate.Currency == currency).SingleOrDefault();
+            return repository.GetCurrencyRates().SingleOrDefault(rate => rate.Currency == currency);
         }
 
         public IEnumerable<string> GetCurrencyRateNames()

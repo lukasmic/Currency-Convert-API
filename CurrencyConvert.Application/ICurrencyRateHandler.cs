@@ -1,5 +1,4 @@
-﻿using Currency_Convert_API.Entities;
-using System.Collections.Generic;
+﻿using Currency_Convert_API.Models;
 
 namespace Currency_Convert_API.Application
 {

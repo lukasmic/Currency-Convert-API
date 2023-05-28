@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Currency_Convert_API.HostedServices
 {
@@ -18,8 +13,8 @@ namespace Currency_Convert_API.HostedServices
         public CurrencyRateFetchService(IConfiguration configuration, ILogger<CurrencyRateFetchService> logger)
         {
             _logger = logger;
-            _downloadFrequency = configuration.GetValue<int>("RatesDownloadFrequencyInMinutes");
-            _fileLocation = configuration.GetValue<string>("RatesFileLocation");
+            _downloadFrequency = int.Parse(configuration.GetSection("RatesDownloadFrequencyInMinutes").Value ?? throw new ArgumentNullException("RatesDownloadFrequencyInMinutes was not found in appsettings.json"));
+            _fileLocation = configuration.GetSection("RatesFileLocation").Value ?? throw new ArgumentNullException("RatesFileLocation was not found in appsettings.json");
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -48,7 +43,7 @@ namespace Currency_Convert_API.HostedServices
             catch (IOException e)
             {
                 _logger.LogError($"Error saving currency rates to file. Trying again. {e}");
-                Task.Delay(TimeSpan.FromMinutes(5)).Wait(); 
+                Task.Delay(TimeSpan.FromMinutes(5)).Wait();
                 GetRatesFromHttp();
             }
         }

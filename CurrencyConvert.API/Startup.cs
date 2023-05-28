@@ -1,6 +1,6 @@
 using Currency_Convert_API.Application;
 using Currency_Convert_API.HostedServices;
-using Currency_Convert_API.Infrastructure;
+using CurrencyConvert.Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

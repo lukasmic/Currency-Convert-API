@@ -1,5 +1,4 @@
-﻿using Currency_Convert_API.Infrastructure;
-using System.Collections.Generic;
+﻿using CurrencyConvert.Infrastructure.Repository;
 using Xunit;
 using Xunit.Categories;
 

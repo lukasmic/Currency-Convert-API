@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace Currency_Convert_API.API
+namespace Currency_Convert_API.Features
 {
     [ApiController]
     [Route("currencyRate")]
