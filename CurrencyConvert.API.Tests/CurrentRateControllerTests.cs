@@ -1,23 +1,23 @@
-﻿using Currency_Convert_API.Application;
-using Currency_Convert_API.Features;
+﻿using CurrencyConvert.Application.CurrentRate;
+using CurrencyConvert.Features.CurrentRate;
 using CurrencyConvert.Infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 using Xunit.Categories;
 
-namespace Currency_Convert_API.API.Tests
+namespace CurrencyConvert.API.Tests
 {
     [UnitTest]
-    public class CurrencyRateControllerTests
+    public class CurrentRateControllerTests
     {
-        private readonly ICurrencyRateHandler _handler;
-        private readonly CurrencyRateController _controller;
+        private readonly ICurrentRateHandler _handler;
+        private readonly CurrentRateController _controller;
 
-        public CurrencyRateControllerTests()
+        public CurrentRateControllerTests()
         {
             var _repository = new InlineRepository();
-            _handler = new CurrencyRateHandler(_repository);
-            _controller = new CurrencyRateController(_handler);
+            _handler = new CurrentRateHandler(_repository);
+            _controller = new CurrentRateController(_handler);
         }
 
         [Theory]

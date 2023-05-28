@@ -1,8 +1,8 @@
-﻿using Currency_Convert_API.Models;
+﻿using CurrencyConvert.Models;
 
-namespace Currency_Convert_API.Application
+namespace CurrencyConvert.Application.CurrentRate
 {
-    public interface ICurrencyRateHandler
+    public interface ICurrentRateHandler
     {
         public CurrencyRate GetCurrencyRate(string currency);
 

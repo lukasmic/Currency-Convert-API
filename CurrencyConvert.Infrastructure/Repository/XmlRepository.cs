@@ -1,36 +1,50 @@
-﻿using Currency_Convert_API.Models;
-using System.Xml;
+﻿using CurrencyConvert.Models;
+using CurrencyConvert.Tools;
+using Microsoft.Extensions.Configuration;
 
 namespace CurrencyConvert.Infrastructure.Repository
 {
     public class XmlRepository : ICurrencyRatesRepository
     {
+        private readonly IConfiguration _configuration;
         private readonly IEnumerable<CurrencyRate> _currencyRates;
 
-        public XmlRepository()
+        public XmlRepository(IConfiguration configuration)
         {
-            List<CurrencyRate> currencyRates = SetBaseRate();
-
-            var reader = XmlReader.Create("eurofxref-daily.xml");
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.Element && reader.Name == "Cube" && reader.GetAttribute("currency") != null)
-                {
-                    var currencyRate = new CurrencyRate()
-                    {
-                        Currency = reader.GetAttribute("currency"),
-                        ToEuro = double.Parse(reader.GetAttribute("rate"))
-                    };
-
-                    currencyRates.Add(currencyRate);
-                }
-            }
-            _currencyRates = currencyRates;
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public IEnumerable<CurrencyRate> GetCurrencyRates()
         {
-            return _currencyRates;
+            List<CurrencyRate> currencyRates = SetBaseRate();
+
+            currencyRates.AddRange(XmlParser.ParseCurrencyRates("", "CurrentRates.xml"));
+
+            return currencyRates;
+        }
+
+        public IEnumerable<CurrencyRate> GetCurrencyRates(string date)
+        {
+            List<CurrencyRate> currencyRates = SetBaseRate();
+
+            currencyRates.AddRange(XmlParser.ParseCurrencyRates(
+                _configuration.GetRequiredSection("HistoricalRatesFolder").Value ?? throw new ArgumentNullException("HistoricalRatesFolder was not found in appsettings.json"),
+                $"currencyRates_{date}.xml"
+            ));
+
+            return currencyRates;
+        }
+
+        public IEnumerable<string> GetHistoricalDates()
+        {
+            var historicalRateDirectory = Path.Combine(
+                Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
+                _configuration.GetRequiredSection("HistoricalRatesFolder").Value ?? throw new ArgumentNullException("HistoricalRatesFolder was not found in appsettings.json")
+            );
+
+            var files = Directory.GetFiles(historicalRateDirectory).Select(f => Path.GetFileNameWithoutExtension(f));
+
+            return files.Select(f => f[14..]);
         }
 
         private static List<CurrencyRate> SetBaseRate()

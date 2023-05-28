@@ -1,4 +1,4 @@
-﻿namespace Currency_Convert_API.Models
+﻿namespace CurrencyConvert.Models
 {
     public class CurrencyRate
     {

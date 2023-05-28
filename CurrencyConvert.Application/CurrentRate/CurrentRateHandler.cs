@@ -1,13 +1,13 @@
-﻿using Currency_Convert_API.Models;
-using CurrencyConvert.Infrastructure.Repository;
+﻿using CurrencyConvert.Infrastructure.Repository;
+using CurrencyConvert.Models;
 
-namespace Currency_Convert_API.Application
+namespace CurrencyConvert.Application.CurrentRate
 {
-    public class CurrencyRateHandler : ICurrencyRateHandler
+    public class CurrentRateHandler : ICurrentRateHandler
     {
         private readonly ICurrencyRatesRepository repository;
 
-        public CurrencyRateHandler(ICurrencyRatesRepository repository)
+        public CurrentRateHandler(ICurrencyRatesRepository repository)
         {
             this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }

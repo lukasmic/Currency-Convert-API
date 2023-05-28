@@ -1,25 +1,25 @@
-﻿using Currency_Convert_API.Application;
+﻿using CurrencyConvert.Application.CurrentRate;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace Currency_Convert_API.Features
+namespace CurrencyConvert.Features.CurrentRate
 {
     [ApiController]
-    [Route("currencyRate")]
+    [Route("[controller]/")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public class CurrencyRateController : ControllerBase
+    public class CurrentRateController : ControllerBase
     {
-        private readonly ICurrencyRateHandler handler;
+        private readonly ICurrentRateHandler handler;
 
-        public CurrencyRateController(ICurrencyRateHandler currencyRateHandler)
+        public CurrentRateController(ICurrentRateHandler currencyRateHandler)
         {
             handler = currencyRateHandler;
         }
 
         [HttpGet]
-        [Route("/currencies")]
+        [Route("currencies")]
         public IEnumerable<string> GetCurrencies()
         {
             var currencyRate = handler.GetCurrencyRateNames();
@@ -27,7 +27,7 @@ namespace Currency_Convert_API.Features
             return currencyRate;
         }
 
-        [HttpGet("/convertedCurrency/{currency}:{amount}/{targetCurrency}")]
+        [HttpGet("convertedCurrency/{currency}:{amount}/{targetCurrency}")]
         public ActionResult<double> GetConvertedCurrency(string currency, string targetCurrency, double amount)
         {
             var rate = handler.GetCurrencyRate(currency.ToUpper());

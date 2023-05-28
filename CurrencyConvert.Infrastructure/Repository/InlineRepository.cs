@@ -1,4 +1,4 @@
-﻿using Currency_Convert_API.Models;
+﻿using CurrencyConvert.Models;
 
 namespace CurrencyConvert.Infrastructure.Repository
 {
@@ -15,6 +15,16 @@ namespace CurrencyConvert.Infrastructure.Repository
         public IEnumerable<CurrencyRate> GetCurrencyRates()
         {
             return currencyRates;
+        }
+
+        public IEnumerable<CurrencyRate> GetCurrencyRates(string date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<string> GetHistoricalDates()
+        {
+            throw new NotImplementedException();
         }
     }
 }

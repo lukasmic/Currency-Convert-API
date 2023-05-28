@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Currency_Convert_API
+namespace CurrencyConvert.API
 {
     public class Program
     {

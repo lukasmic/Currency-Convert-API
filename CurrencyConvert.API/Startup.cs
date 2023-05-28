@@ -1,5 +1,6 @@
-using Currency_Convert_API.Application;
-using Currency_Convert_API.HostedServices;
+using CurrencyConvert.Application.CurrentRate;
+using CurrencyConvert.Application.HistoricalRate;
+using CurrencyConvert.HostedServices;
 using CurrencyConvert.Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
-namespace Currency_Convert_API
+namespace CurrencyConvert.API
 {
     public class Startup
     {
@@ -30,7 +31,8 @@ namespace Currency_Convert_API
             services.AddCors();
             services.AddHostedService<CurrencyRateFetchService>();
             services.AddTransient<ICurrencyRatesRepository, XmlRepository>();
-            services.AddScoped<ICurrencyRateHandler, CurrencyRateHandler>();
+            services.AddScoped<ICurrentRateHandler, CurrentRateHandler>();
+            services.AddScoped<IHistoricalRateHandler, HistoricalRateHandler>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

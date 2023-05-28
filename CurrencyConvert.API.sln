@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyConvert.HostedServi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyConvert.Infrastructure", "CurrencyConvert.Infrastructure\CurrencyConvert.Infrastructure.csproj", "{BD6741A4-E358-4EA2-A4B5-8E472D92CFFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyRates.Tools", "CurrencyRates.Tools\CurrencyRates.Tools.csproj", "{7CF5B16B-D965-412D-821B-F9440307702C}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConvert.Models", "CurrencyConvert.Models\CurrencyConvert.Models.csproj", "{ADE2B5DE-6C95-45AD-8E16-FE6EB53D88D0}"
 EndProject
 Global
@@ -50,6 +52,10 @@ Global
 		{BD6741A4-E358-4EA2-A4B5-8E472D92CFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD6741A4-E358-4EA2-A4B5-8E472D92CFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD6741A4-E358-4EA2-A4B5-8E472D92CFFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF5B16B-D965-412D-821B-F9440307702C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF5B16B-D965-412D-821B-F9440307702C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF5B16B-D965-412D-821B-F9440307702C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF5B16B-D965-412D-821B-F9440307702C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADE2B5DE-6C95-45AD-8E16-FE6EB53D88D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ADE2B5DE-6C95-45AD-8E16-FE6EB53D88D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADE2B5DE-6C95-45AD-8E16-FE6EB53D88D0}.Release|Any CPU.ActiveCfg = Release|Any CPU

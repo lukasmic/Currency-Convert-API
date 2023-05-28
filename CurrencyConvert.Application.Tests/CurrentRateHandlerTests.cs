@@ -1,17 +1,18 @@
-﻿using CurrencyConvert.Infrastructure.Repository;
+﻿using CurrencyConvert.Application.CurrentRate;
+using CurrencyConvert.Infrastructure.Repository;
 using Xunit;
 using Xunit.Categories;
 
-namespace Currency_Convert_API.Application.Tests
+namespace CurrencyConvert.Application.Tests
 {
     [UnitTest]
-    public class CurrencyRateHandlerTests
+    public class CurrentRateHandlerTests
     {
-        private readonly CurrencyRateHandler handler;
+        private readonly CurrentRateHandler handler;
 
-        public CurrencyRateHandlerTests()
+        public CurrentRateHandlerTests()
         {
-            handler = new CurrencyRateHandler(new InlineRepository());
+            handler = new CurrentRateHandler(new InlineRepository());
         }
 
         [Theory]
