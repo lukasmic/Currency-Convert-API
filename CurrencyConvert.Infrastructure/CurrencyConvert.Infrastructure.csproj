@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CurrencyConvert.Models\CurrencyConvert.Models.csproj" />
-    <ProjectReference Include="..\CurrencyRates.Tools\CurrencyRates.Tools.csproj" />
+    <ProjectReference Include="..\CurrencyRates.Tools\CurrencyConvert.Tools.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,7 +18,7 @@ namespace CurrencyConvert.Infrastructure.Repository
         {
             List<CurrencyRate> currencyRates = SetBaseRate();
 
-            currencyRates.AddRange(XmlParser.ParseCurrencyRates("", "CurrentRates.xml"));
+            currencyRates.AddRange(XmlParser.GetCurrencyRates("", "CurrentRates.xml"));
 
             return currencyRates;
         }
@@ -27,7 +27,7 @@ namespace CurrencyConvert.Infrastructure.Repository
         {
             List<CurrencyRate> currencyRates = SetBaseRate();
 
-            currencyRates.AddRange(XmlParser.ParseCurrencyRates(
+            currencyRates.AddRange(XmlParser.GetCurrencyRates(
                 _configuration.GetRequiredSection("HistoricalRatesFolder").Value ?? throw new ArgumentNullException("HistoricalRatesFolder was not found in appsettings.json"),
                 $"currencyRates_{date}.xml"
             ));

@@ -5,15 +5,15 @@ namespace CurrencyConvert.Tools
 {
     public class XmlParser
     {
-        public static IEnumerable<CurrencyRate> ParseCurrencyRates(string folder, string xml)
+        public static IEnumerable<CurrencyRate> GetCurrencyRates(string folder, string xmlName)
         {
             var currencyRates = new List<CurrencyRate>();
 
             var solutionFolder = Directory.GetParent(Directory.GetCurrentDirectory());
 
             var fileDirectory = folder == "" ?
-                Path.Combine(solutionFolder!.FullName, $"{xml}") :
-                Path.Combine(solutionFolder!.FullName, $"{folder}", $"{xml}");
+                Path.Combine(solutionFolder!.FullName, $"{xmlName}") :
+                Path.Combine(solutionFolder!.FullName, $"{folder}", $"{xmlName}");
 
             if (!File.Exists(fileDirectory))
             {
@@ -40,6 +40,25 @@ namespace CurrencyConvert.Tools
             }
 
             return currencyRates;
+        }
+
+        public static string ParseDate(string xml)
+        {
+            var date = "";
+
+            using (StringReader sr = new StringReader(xml))
+            {
+                var reader = XmlReader.Create(sr);
+                while (reader.Read())
+                {
+                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "Cube" && reader.GetAttribute("time") != null)
+                    {
+                        date = reader.GetAttribute("time");
+                    }
+                }
+            }
+
+            return date;
         }
     }
 }
